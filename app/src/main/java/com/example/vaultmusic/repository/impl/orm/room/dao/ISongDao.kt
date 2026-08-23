@@ -1,4 +1,4 @@
-package com.example.vaultmusic.repository.impl.databases.room.dao
+package com.example.vaultmusic.repository.impl.orm.room.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -7,8 +7,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.vaultmusic.repository.impl.databases.room.dbo.SongDbo
-import com.example.vaultmusic.repository.impl.databases.room.dbo.relation.PopulatedSongDbo
+import com.example.vaultmusic.repository.impl.orm.room.dbo.SongDbo
+import com.example.vaultmusic.repository.impl.orm.room.dbo.relation.PopulatedSongDbo
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -54,6 +54,6 @@ interface ISongDao {
      *
      * @param songId The Primary Key of the song to delete.
      */
-    @Delete
+    @Query("DELETE FROM SONGS WHERE id = :songId")
     suspend fun delete(songId: Long)
 }

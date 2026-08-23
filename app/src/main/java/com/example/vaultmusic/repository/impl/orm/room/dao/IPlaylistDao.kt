@@ -1,4 +1,4 @@
-package com.example.vaultmusic.repository.impl.databases.room.dao
+package com.example.vaultmusic.repository.impl.orm.room.dao
 
 import androidx.room.Dao
 import androidx.room.Delete
@@ -7,9 +7,9 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
 import androidx.room.Update
-import com.example.vaultmusic.repository.impl.databases.room.dbo.PlaylistDbo
-import com.example.vaultmusic.repository.impl.databases.room.dbo.crossRef.PlaylistSongCrossRef
-import com.example.vaultmusic.repository.impl.databases.room.dbo.relation.PopulatedPlaylistDbo
+import com.example.vaultmusic.repository.impl.orm.room.dbo.PlaylistDbo
+import com.example.vaultmusic.repository.impl.orm.room.dbo.crossRef.PlaylistSongCrossRef
+import com.example.vaultmusic.repository.impl.orm.room.dbo.relation.PopulatedPlaylistDbo
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -21,16 +21,6 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface IPlaylistDao {
-
-    /**
-     * Retrieves a reactive stream of all playlists, completely populated with their songs.
-     *
-     * @return A [Flow] emitting a list of populated playlist relations.
-     */
-    @Transaction
-    @Query("SELECT * FROM PLAYLISTS ORDER BY creationDate DESC")
-    fun getAllPlaylists(): Flow<List<PopulatedPlaylistDbo>>
-
     /**
      * Inserts a new, empty playlist into the database.
      *
@@ -54,7 +44,7 @@ interface IPlaylistDao {
      *
      * @param playlistId The Primary Key of the playlist to delete.
      */
-    @Delete
+    @Query("DELETE FROM PLAYLISTS WHERE id = :playlistId")
     suspend fun delete(playlistId: Long)
 
     /**
@@ -66,11 +56,20 @@ interface IPlaylistDao {
     suspend fun addSongToPlaylist(crossRef: PlaylistSongCrossRef)
 
     /**
+     * Retrieves a reactive stream of all playlists, completely populated with their songs.
+     *
+     * @return A [Flow] emitting a list of populated playlist relations.
+     */
+    @Transaction
+    @Query("SELECT * FROM PLAYLISTS ORDER BY creationDate DESC")
+    fun getAllPlaylists(): Flow<List<PopulatedPlaylistDbo>>
+
+    /**
      * Removes a song from a playlist by deleting its cross-reference record.
      *
      * @param playlistId The ID of the playlist.
      * @param songId The ID of the song to remove from the playlist.
      */
     @Query("DELETE FROM PLAYLIST_SONG WHERE playlistId = :playlistId AND songId = :songId")
-            suspend fun removeSongFromPlaylist(playlistId: Long, songId: Long)
+    suspend fun removeSongFromPlaylist(playlistId: Long, songId: Long)
 }
