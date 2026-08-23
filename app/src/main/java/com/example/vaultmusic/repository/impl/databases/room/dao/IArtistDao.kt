@@ -21,20 +21,35 @@ interface IArtistDao {
 
     /**
      * Retrieves a reactive stream of all artists in alphabetical order.
+     *
+     * @return A [Flow] containing a list of artist entities.
      */
     @Query("SELECT * FROM ARTISTS ORDER BY name ASC")
     fun getAllArtists(): Flow<List<ArtistDbo>>
 
     /**
      * Inserts a new artist into the database.
+     *
+     * @param artist The [ArtistDbo] entity to save.
+     *
      * @return The newly generated unique ID (Long) for the inserted artist.
      */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(artist: ArtistDbo): Long
 
+    /**
+     * Updates an existing artist in the database based on its Primary Key.
+     *
+     * @param artist The [ArtistDbo] containing the updated values.
+     */
     @Update
     suspend fun update(artist: ArtistDbo)
 
+    /**
+     * Removes an artist from the database based on its Primary Key.
+     *
+     * @param artistId The Primary Key of the artist to delete.
+     */
     @Delete
-    suspend fun delete(artistID: Long)
+    suspend fun delete(artistId: Long)
 }

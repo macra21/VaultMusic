@@ -23,8 +23,9 @@ interface ISongDao {
 
     /**
      * Retrieves a reactive stream of all songs.
-     * Uses [@Transaction] because Room must safely join the SONGS, ALBUMS, and ARTISTS
-    tables.
+     * Uses [@Transaction] because Room must safely join the SONGS, ALBUMS, and ARTISTS tables.
+     *
+     * @return @return A [Flow] containing a list of populated song relations.
      */
     @Transaction
     @Query("SELECT * FROM SONGS ORDER BY title ASC")
@@ -32,14 +33,27 @@ interface ISongDao {
 
     /**
      * Inserts a new song into the database.
+     *
+     * @param song The [SongDbo] entity to save.
+     *
      * @return The newly generated unique ID (Long) for the inserted song.
      */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(song: SongDbo): Long
 
+    /**
+     * Updates an existing song in the database based on its Primary Key.
+     *
+     * @param song The [SongDbo] containing the updated values.
+     */
     @Update
     suspend fun update(song: SongDbo)
 
+    /**
+     * Removes a song from the database based on its Primary Key.
+     *
+     * @param songId The Primary Key of the song to delete.
+     */
     @Delete
     suspend fun delete(songId: Long)
 }
