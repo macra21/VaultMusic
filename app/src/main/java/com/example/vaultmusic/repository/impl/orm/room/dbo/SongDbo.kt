@@ -1,4 +1,4 @@
-package com.example.vaultmusic.repository.impl.databases.room.dbo
+package com.example.vaultmusic.repository.impl.orm.room.dbo
 
 import androidx.room.Entity
 import androidx.room.ForeignKey

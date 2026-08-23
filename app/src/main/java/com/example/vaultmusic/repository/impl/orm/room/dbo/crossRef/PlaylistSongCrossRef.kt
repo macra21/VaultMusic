@@ -1,10 +1,10 @@
-package com.example.vaultmusic.repository.impl.databases.room.dbo.crossRef
+package com.example.vaultmusic.repository.impl.orm.room.dbo.crossRef
 
 import androidx.room.Entity
 
 /**
- * A Many-to-Many cross-reference table between [com.example.vaultmusic.repository.impl.databases.room.dbo.PlaylistDbo]
- * and [com.example.vaultmusic.repository.impl.databases.room.dbo.SongDbo].
+ * A Many-to-Many cross-reference table between [com.example.vaultmusic.repository.impl.orm.room.dbo.PlaylistDbo]
+ * and [com.example.vaultmusic.repository.impl.orm.room.dbo.SongDbo].
  *
  * @property playlistId The ID of the playlist.
  * @property songId The ID of the song inside the playlist.
