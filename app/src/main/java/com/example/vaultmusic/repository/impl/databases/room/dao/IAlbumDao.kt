@@ -41,5 +41,5 @@ interface IAlbumDao {
     suspend fun update(album: AlbumDbo)
 
     @Delete
-    suspend fun delete(album: AlbumDbo)
+    suspend fun delete(albumId: Long)
 }

@@ -41,5 +41,5 @@ interface ISongDao {
     suspend fun update(song: SongDbo)
 
     @Delete
-    suspend fun delete(song: SongDbo)
+    suspend fun delete(songId: Long)
 }

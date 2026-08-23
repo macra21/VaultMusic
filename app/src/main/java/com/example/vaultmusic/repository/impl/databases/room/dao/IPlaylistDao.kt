@@ -41,7 +41,7 @@ interface IPlaylistDao {
     suspend fun update(playlist: PlaylistDbo)
 
     @Delete
-    suspend fun delete(playlist: PlaylistDbo)
+    suspend fun delete(playlistId: Long)
 
     /**
      * Links an existing song to a playlist by inserting a cross-reference record.

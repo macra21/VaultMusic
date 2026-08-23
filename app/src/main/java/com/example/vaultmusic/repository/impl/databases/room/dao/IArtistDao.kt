@@ -36,5 +36,5 @@ interface IArtistDao {
     suspend fun update(artist: ArtistDbo)
 
     @Delete
-    suspend fun delete(artist: ArtistDbo)
+    suspend fun delete(artistID: Long)
 }
