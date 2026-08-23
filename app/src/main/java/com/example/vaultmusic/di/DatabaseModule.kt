@@ -2,11 +2,11 @@ package com.example.vaultmusic.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.vaultmusic.repository.impl.databases.room.AppDatabase
-import com.example.vaultmusic.repository.impl.databases.room.dao.IAlbumDao
-import com.example.vaultmusic.repository.impl.databases.room.dao.IArtistDao
-import com.example.vaultmusic.repository.impl.databases.room.dao.IPlaylistDao
-import com.example.vaultmusic.repository.impl.databases.room.dao.ISongDao
+import com.example.vaultmusic.repository.impl.orm.room.AppDatabase
+import com.example.vaultmusic.repository.impl.orm.room.dao.IAlbumDao
+import com.example.vaultmusic.repository.impl.orm.room.dao.IArtistDao
+import com.example.vaultmusic.repository.impl.orm.room.dao.IPlaylistDao
+import com.example.vaultmusic.repository.impl.orm.room.dao.ISongDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,9 +31,7 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideSongDao(database: AppDatabase): ISongDao {
-        return database.songDao()
-    }
+    fun provideSongDao(database: AppDatabase): ISongDao = database.songDao()
 
     @Provides
     @Singleton
