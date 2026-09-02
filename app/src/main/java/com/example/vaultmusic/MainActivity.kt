@@ -30,6 +30,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
+@Suppress("FunctionNaming")
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Text(
         text = "Hello $name!",
@@ -39,6 +40,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
 @Preview(showBackground = true)
 @Composable
+@Suppress("FunctionNaming")
 fun GreetingPreview() {
     VaultMusicTheme {
         Greeting("Android")
@@ -46,6 +48,7 @@ fun GreetingPreview() {
 }
 
 @Composable
+@Suppress("FunctionNaming", "UnusedParameter")
 fun VaultMusicTheme(content: @Composable () -> Unit) {
-    TODO("Not yet implemented")
+    content()
 }
